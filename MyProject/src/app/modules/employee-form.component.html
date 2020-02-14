@@ -35,12 +35,26 @@
       <div class="form-group">
         <label for="email">Email:</label>
         <input
-          type="text"
+          [class.is-invalid]="
+            employeeForm.get('email').invalid &&
+            employeeForm.get('email').touched
+          "
+          type="email"
           class="form-control"
           id="email"
           placeholder="Enter email"
           formControlName="email"
         />
+
+        <div
+          style="color: red;"
+          *ngIf="
+            employeeForm.get('email').invalid &&
+            employeeForm.get('email').touched
+          "
+        >
+          Email must be a valid email address. For example : example@mail.com
+        </div>
       </div>
 
       <button

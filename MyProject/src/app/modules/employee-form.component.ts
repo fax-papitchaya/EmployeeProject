@@ -36,7 +36,10 @@ export class EmployeeFormComponent implements OnInit {
       firstname: new FormControl("", [Validators.required]),
       lastname: new FormControl("", [Validators.required]),
       birthday: new FormControl("", [Validators.required]),
-      email: new FormControl("", [Validators.required])
+      email: new FormControl("", [
+        Validators.required,
+        Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$")
+      ])
     });
 
     // ถ้ามี id แสดงว่าเป็นการ update ให้เรียกข้อมูล Employee ของคนนั้นๆมาแสดง โดยใช้ id
@@ -78,7 +81,7 @@ export class EmployeeFormComponent implements OnInit {
             relativeTo: this.activatedRoute
           });
         },
-        error => console.log(error) // หาก error ให้แสดงข้อความ
+        error => alert(error) // หาก error ให้แสดงข้อความ
       );
     } else {
       // insert : post
@@ -87,7 +90,7 @@ export class EmployeeFormComponent implements OnInit {
           // insert สำเร็จ ให้กลับไปยังหน้ารายการ Employee
           this.router.navigate(["../"], { relativeTo: this.activatedRoute });
         },
-        error => console.log(error) // หาก error ให้แสดงข้อความ
+        error => alert(error) // หาก error ให้แสดงข้อความ
       );
     }
   }

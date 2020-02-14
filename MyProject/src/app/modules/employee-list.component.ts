@@ -29,7 +29,7 @@ export class EmployeeListComponent implements OnInit {
           alert("ลบข้อมูลเรียบร้อยแล้ว");
           this.getEmployeeAll();
         },
-        error => console.log("onDelete Error")
+        error => alert(error)
       );
     }
   }
