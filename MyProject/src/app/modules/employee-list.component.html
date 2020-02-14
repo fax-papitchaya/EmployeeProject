@@ -1,7 +1,7 @@
 <div class="container-fluid">
-  <h1>รายการข้อมูลพนักงาน</h1>
+  <h1>รายการข้อมูล Employees</h1>
   <br />
-  <a class="btn btn-success" routerLink="/add">เพิ่มใหม่</a>
+  <a class="btn btn-success" routerLink="/add">Add Employee</a>
   <table class="table">
     <thead>
       <td>ลำดับ</td>
@@ -9,7 +9,7 @@
       <td>Lastname</td>
       <td>Birthday</td>
       <td>Email</td>
-      <td>manage</td>
+      <td>Operation</td>
     </thead>
     <tbody>
       <tr *ngFor="let item of employeeList; index as i">
@@ -20,14 +20,14 @@
         <td>{{ item.email }}</td>
         <td>
           <a class="btn btn-warning" [routerLink]="['/edit', item._id]"
-            >แก้ไข</a
+            >Update</a
           >
           <button
             type="button"
             class="btn btn-danger"
             (click)="onDelete(item._id)"
           >
-            ลบ
+            Delete
           </button>
         </td>
       </tr>

@@ -21,12 +21,17 @@ export class EmployeeFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // รับค่า id จาก url
     this.id = this.activatedRoute.snapshot.params["id"];
+
+    // ถ้ามี id แสดงว่าเป็นการ update , ถ้าไม่มีค่า id แสดงว่าเป็น insert
     if (this.id) {
-      this.editMode = true;
+      this.editMode = true; // update
     } else {
-      this.editMode = false;
+      this.editMode = false; // insert
     }
+
+    // ประกาศ Control ที่ใช้ในฟอร์ม
     this.employeeForm = new FormGroup({
       firstname: new FormControl("", [Validators.required]),
       lastname: new FormControl("", [Validators.required]),
@@ -34,14 +39,17 @@ export class EmployeeFormComponent implements OnInit {
       email: new FormControl("", [Validators.required])
     });
 
+    // ถ้ามี id แสดงว่าเป็นการ update ให้เรียกข้อมูล Employee ของคนนั้นๆมาแสดง โดยใช้ id
     if (this.editMode) {
       this.getEmployeeById(this.id);
     }
   }
 
   getEmployeeById(id: string) {
+    // ข้อมูล Employee รายคน
     this.employeeService.getEmployeeByID(id).subscribe(res => {
       this.employeeList = res;
+      // นำข้อมูลที่ได้มาแสดงบนฟอร์ม
       this.employeeForm.patchValue({
         firstname: this.employeeList.firstname,
         lastname: this.employeeList.lastname,
@@ -52,6 +60,7 @@ export class EmployeeFormComponent implements OnInit {
   }
 
   onSubmit() {
+    // นำค่าที่ได้จากฟอร์ม ระบุลงไปใน model Employees
     const formValue = this.employeeForm.value;
     const employees = new Employees();
     employees.firstname = formValue.firstname;
@@ -60,28 +69,31 @@ export class EmployeeFormComponent implements OnInit {
     employees.email = formValue.email;
 
     if (this.editMode) {
-      //update : put
+      // update : put
       employees._id = this.id;
       this.employeeService.updateEmployeeById(employees).subscribe(
         res => {
+          // update สำเร็จ ให้กลับไปยังหน้ารายการ Employee
           this.router.navigate(["../../"], {
             relativeTo: this.activatedRoute
           });
         },
-        error => console.log("Update Error")
+        error => console.log(error) // หาก error ให้แสดงข้อความ
       );
     } else {
-      //insert : post
+      // insert : post
       this.employeeService.addNewEmployee(employees).subscribe(
         res => {
+          // insert สำเร็จ ให้กลับไปยังหน้ารายการ Employee
           this.router.navigate(["../"], { relativeTo: this.activatedRoute });
         },
-        error => console.log("insert Error")
+        error => console.log(error) // หาก error ให้แสดงข้อความ
       );
     }
   }
 
   onCancel() {
+    // เมื่อกด ยกเลิก ให้กลับไปยังหน้ารายการ Employee
     const path = this.editMode ? "../../" : "../";
     this.router.navigate([path], { relativeTo: this.activatedRoute });
   }
