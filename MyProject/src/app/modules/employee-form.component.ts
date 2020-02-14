@@ -77,6 +77,7 @@ export class EmployeeFormComponent implements OnInit {
       this.employeeService.updateEmployeeById(employees).subscribe(
         res => {
           // update สำเร็จ ให้กลับไปยังหน้ารายการ Employee
+          alert("บันทึกข้อมูลเรียบร้อย");
           this.router.navigate(["../../"], {
             relativeTo: this.activatedRoute
           });
@@ -88,6 +89,7 @@ export class EmployeeFormComponent implements OnInit {
       this.employeeService.addNewEmployee(employees).subscribe(
         res => {
           // insert สำเร็จ ให้กลับไปยังหน้ารายการ Employee
+          alert("เพิ่มข้อมูลเรียบร้อย");
           this.router.navigate(["../"], { relativeTo: this.activatedRoute });
         },
         error => alert(error) // หาก error ให้แสดงข้อความ
