@@ -16,7 +16,6 @@ export class EmployeeListComponent implements OnInit {
   getEmployeeAll() {
     this.employeeService.getEmployeeAll().subscribe(res => {
       this.employeeList = res;
-      console.log("this.employeeList", this.employeeList);
     });
   }
 
@@ -24,7 +23,6 @@ export class EmployeeListComponent implements OnInit {
     if (confirm("ต้องการลบข้อมูลใช่หรือไม่")) {
       this.employeeService.DeleteEmployeeByID(id).subscribe(
         () => {
-          console.log("onDelete Success");
           this.getEmployeeAll();
         },
         error => console.log("onDelete Error")

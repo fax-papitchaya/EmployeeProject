@@ -22,7 +22,6 @@ export class EmployeeFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.params["id"];
-    console.log("this.id", this.id);
     if (this.id) {
       this.editMode = true;
     } else {
@@ -42,7 +41,6 @@ export class EmployeeFormComponent implements OnInit {
 
   getEmployeeById(id: string) {
     this.employeeService.getEmployeeByID(id).subscribe(res => {
-      console.log("res", res);
       this.employeeList = res;
       this.employeeForm.patchValue({
         firstname: this.employeeList.firstname,
@@ -54,7 +52,6 @@ export class EmployeeFormComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log("onSubmit");
     const formValue = this.employeeForm.value;
     const employees = new Employees();
     employees.firstname = formValue.firstname;
@@ -65,12 +62,8 @@ export class EmployeeFormComponent implements OnInit {
     if (this.editMode) {
       //update : put
       employees._id = this.id;
-      console.log("update");
       this.employeeService.updateEmployeeById(employees).subscribe(
         res => {
-          console.log("DataUsers", employees);
-          console.log("res", res);
-          console.log("Update Success");
           this.router.navigate(["../../"], {
             relativeTo: this.activatedRoute
           });
@@ -79,12 +72,8 @@ export class EmployeeFormComponent implements OnInit {
       );
     } else {
       //insert : post
-      console.log("employees", employees);
-      console.log("insert");
       this.employeeService.addNewEmployee(employees).subscribe(
         res => {
-          console.log("res", res);
-          console.log("insert Success");
           this.router.navigate(["../"], { relativeTo: this.activatedRoute });
         },
         error => console.log("insert Error")
@@ -93,7 +82,6 @@ export class EmployeeFormComponent implements OnInit {
   }
 
   onCancel() {
-    console.log("button is clicked!");
     const path = this.editMode ? "../../" : "../";
     this.router.navigate([path], { relativeTo: this.activatedRoute });
   }

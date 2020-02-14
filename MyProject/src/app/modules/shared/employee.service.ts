@@ -9,6 +9,7 @@ export class EmployeeService {
 
   constructor(private httpClient: HttpClient, private route: Router) {}
 
+  //OPTIONS เพื่อใช้ในการร้องขอข้อมูล
   gethttpOptions() {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -19,6 +20,7 @@ export class EmployeeService {
     return httpOptions;
   }
 
+  //
   getEmployeeAll() {
     return this.httpClient.get(
       `${this.apiURL}/employees`,
