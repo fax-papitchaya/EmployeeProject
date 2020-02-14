@@ -1,0 +1,36 @@
+<div class="container-fluid">
+  <h1>รายการข้อมูลพนักงาน</h1>
+  <br />
+  <a class="btn btn-success" routerLink="/add">เพิ่มใหม่</a>
+  <table class="table">
+    <thead>
+      <td>ลำดับ</td>
+      <td>Firstname</td>
+      <td>Lastname</td>
+      <td>Birthday</td>
+      <td>Email</td>
+      <td>manage</td>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of employeeList; index as i">
+        <td>{{ i + 1 }}</td>
+        <td>{{ item.firstname }}</td>
+        <td>{{ item.lastname }}</td>
+        <td>{{ item.birthday }}</td>
+        <td>{{ item.email }}</td>
+        <td>
+          <a class="btn btn-warning" [routerLink]="['/edit', item._id]"
+            >แก้ไข</a
+          >
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="onDelete(item._id)"
+          >
+            ลบ
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
