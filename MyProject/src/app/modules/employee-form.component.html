@@ -4,16 +4,18 @@
     <div style="margin:20px 0 25px 0;">
       <div class="form-group">
         <label for="firstname"
-          >Firstname :
+          ><b>Firstname</b>
           <span
             style="color: red;"
-            *ngIf="employeeForm.get('firstname').invalid"
+            *ngIf="employeeForm.get('firstname').invalid && OnSubmit === true"
           >
             First Name is required
           </span></label
         >
         <input
-          [class.is-invalid]="employeeForm.get('firstname').invalid"
+          [class.is-invalid]="
+            employeeForm.get('firstname').invalid && OnSubmit === true
+          "
           type="text"
           class="form-control"
           id="firstname"
@@ -23,16 +25,18 @@
       </div>
       <div class="form-group">
         <label for="lastname"
-          >Lastname :
+          ><b>Lastname</b>
           <span
             style="color: red;"
-            *ngIf="employeeForm.get('lastname').invalid"
+            *ngIf="employeeForm.get('lastname').invalid && OnSubmit === true"
           >
             Last Name is required
           </span></label
         >
         <input
-          [class.is-invalid]="employeeForm.get('lastname').invalid"
+          [class.is-invalid]="
+            employeeForm.get('lastname').invalid && OnSubmit === true
+          "
           type="text"
           class="form-control"
           id="lastname"
@@ -42,16 +46,18 @@
       </div>
       <div class="form-group">
         <label for="birthday"
-          >Birthday :
+          ><b>Birthday</b>
           <span
             style="color: red;"
-            *ngIf="employeeForm.get('birthday').invalid"
+            *ngIf="employeeForm.get('birthday').invalid && OnSubmit === true"
           >
             Birthday is required
           </span></label
         >
         <input
-          [class.is-invalid]="employeeForm.get('birthday').invalid"
+          [class.is-invalid]="
+            employeeForm.get('birthday').invalid && OnSubmit === true
+          "
           type="date"
           class="form-control"
           id="birthday"
@@ -61,13 +67,18 @@
       </div>
       <div class="form-group">
         <label for="email"
-          >Email :
-          <span style="color: red;" *ngIf="employeeForm.get('email').invalid">
+          ><b>Email</b>
+          <span
+            style="color: red;"
+            *ngIf="employeeForm.get('email').invalid && OnSubmit === true"
+          >
             Email must be a valid email address. For example : example@mail.com
           </span></label
         >
         <input
-          [class.is-invalid]="employeeForm.get('email').invalid"
+          [class.is-invalid]="
+            employeeForm.get('email').invalid && OnSubmit === true
+          "
           type="email"
           class="form-control"
           id="email"
@@ -76,11 +87,8 @@
         />
       </div>
 
-      <button
-        type="submit"
-        class="btn btn-primary"
-        [disabled]="!employeeForm.valid"
-      >
+      <button type="submit" class="btn btn-primary">
+        <!-- [disabled]="!employeeForm.valid" -->
         Submit
       </button>
       <button type="button" class="btn btn-secondary" (click)="onCancel()">

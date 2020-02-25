@@ -13,6 +13,7 @@ export class EmployeeFormComponent implements OnInit {
   editMode: boolean = false;
   employeeForm: FormGroup;
   employeeList: any;
+  OnSubmit: boolean = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -26,8 +27,10 @@ export class EmployeeFormComponent implements OnInit {
 
     // ถ้ามี id แสดงว่าเป็นการ update , ถ้าไม่มีค่า id แสดงว่าเป็น insert
     if (this.id) {
+      this.OnSubmit = true;
       this.editMode = true; // update
     } else {
+      this.OnSubmit = false;
       this.editMode = false; // insert
     }
 
@@ -63,6 +66,7 @@ export class EmployeeFormComponent implements OnInit {
   }
 
   onSubmit() {
+    this.OnSubmit = true;
     // นำค่าที่ได้จากฟอร์ม ระบุลงไปใน model Employees
     const formValue = this.employeeForm.value;
     const employees = new Employees();
@@ -70,30 +74,40 @@ export class EmployeeFormComponent implements OnInit {
     employees.lastname = formValue.lastname;
     employees.birthday = formValue.birthday;
     employees.email = formValue.email;
-
-    if (this.editMode) {
-      // update : put
-      employees._id = this.id;
-      this.employeeService.updateEmployeeById(employees).subscribe(
-        res => {
-          // update สำเร็จ ให้กลับไปยังหน้ารายการ Employee
-          alert("บันทึกข้อมูลเรียบร้อย");
-          this.router.navigate(["../../"], {
-            relativeTo: this.activatedRoute
-          });
-        },
-        error => alert(error) // หาก error ให้แสดงข้อความ
-      );
+    if (
+      employees.firstname.trim() === "" ||
+      employees.lastname.trim() === "" ||
+      employees.birthday.toString() === "" ||
+      employees.email.trim() === ""
+    ) {
+      alert("กรุณาระบุข้อมูลให้ครบถ้วน");
     } else {
-      // insert : post
-      this.employeeService.addNewEmployee(employees).subscribe(
-        res => {
-          // insert สำเร็จ ให้กลับไปยังหน้ารายการ Employee
-          alert("เพิ่มข้อมูลเรียบร้อย");
-          this.router.navigate(["../"], { relativeTo: this.activatedRoute });
-        },
-        error => alert(error) // หาก error ให้แสดงข้อความ
-      );
+      if (this.editMode) {
+        // update : put
+        employees._id = this.id;
+        this.employeeService.updateEmployeeById(employees).subscribe(
+          res => {
+            // update สำเร็จ ให้กลับไปยังหน้ารายการ Employee
+            alert("บันทึกข้อมูลเรียบร้อย");
+            this.router.navigate(["../../"], {
+              relativeTo: this.activatedRoute
+            });
+          },
+          error =>
+            alert("ไม่สามารถบันทึกข้อมูลได้ กรุณาตรวจสอบความถูกต้องของข้อมูล!") // หาก error ให้แสดงข้อความ
+        );
+      } else {
+        // insert : post
+        this.employeeService.addNewEmployee(employees).subscribe(
+          res => {
+            // insert สำเร็จ ให้กลับไปยังหน้ารายการ Employee
+            alert("เพิ่มข้อมูลเรียบร้อย");
+            this.router.navigate(["../"], { relativeTo: this.activatedRoute });
+          },
+          error =>
+            alert("ไม่สามารถบันทึกข้อมูลได้ กรุณาตรวจสอบความถูกต้องของข้อมูล!") // หาก error ให้แสดงข้อความ
+        );
+      }
     }
   }
 
