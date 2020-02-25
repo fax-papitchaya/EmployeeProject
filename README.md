@@ -8,7 +8,7 @@ step 1.Install node.js (https://nodejs.org/en/)
 
 step 2.Install git (https://git-scm.com/)
 
-step 3.This project was generated with [Angular CLI] version 8.3.25.
+step 3.This project was generated with [Angular CLI] version 9.0.1.
 Install the Angular-CLI (command line) > npm install -g @angular/cli
 
 # Cloning a Git repository
