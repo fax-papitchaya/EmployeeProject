@@ -4,12 +4,12 @@
   <a class="btn btn-success" routerLink="/add">Add Employee</a>
   <table class="table">
     <thead>
-      <td>ลำดับ</td>
-      <td>Firstname</td>
-      <td>Lastname</td>
-      <td>Birthday</td>
-      <td>Email</td>
-      <td>Operation</td>
+      <td><b>row</b></td>
+      <td><b>Firstname</b></td>
+      <td><b>Lastname</b></td>
+      <td><b>Birthday</b></td>
+      <td><b>Email</b></td>
+      <td><b>Operation</b></td>
     </thead>
     <tbody>
       <tr *ngFor="let item of employeeList; index as i">
@@ -22,6 +22,7 @@
           <a class="btn btn-warning" [routerLink]="['/edit', item._id]"
             >Update</a
           >
+          &nbsp;
           <button
             type="button"
             class="btn btn-danger"
