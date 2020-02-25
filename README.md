@@ -12,7 +12,8 @@ step 3.This project was generated with [Angular CLI] version 8.3.25.
 Install the Angular-CLI (command line) > npm install -g @angular/cli
 
 ##Cloning a Git repository
-step 1.Find the Git Repo and Copy �Git� with HTTPS Link "https://github.com/fax-papitchaya/EmployeeProject.git"
+
+step 1.Find the Git Repo and Copy Git with HTTPS Link "https://github.com/fax-papitchaya/EmployeeProject.git"
 
 step 2.Paste the command you copied from git D:\> git clone https://github.com/fax-papitchaya/EmployeeProject.git
 
